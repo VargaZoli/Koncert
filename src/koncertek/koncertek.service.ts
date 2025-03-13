@@ -33,12 +33,16 @@ export class KoncertekService {
 
 
 
- async update (id: number, data: { BandName?: string; StartTime?: Date; Length?: number; Postponed?: boolean; }): Promise<Koncert> {
-  return this.prisma.koncert.update({
-    where: { id },
-    data,
-  });
-}
+    async update(id: number, data: { BandName?: string; StartTime?: Date | string; Length?: number; Postponed?: boolean; }): Promise<Koncert> {
+      return this.prisma.koncert.update({
+        where: { id },
+        data: {
+          ...data,
+          StartTime: data.StartTime ? new Date(data.StartTime).toISOString() : undefined,
+        },
+      });
+    }
+    
 
 
 async remove(id: number): Promise<Koncert> {

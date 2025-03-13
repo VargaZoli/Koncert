@@ -5,6 +5,8 @@ export class CreateKoncertekDto {
   @IsNotEmpty()
   BandName: string
 
+
+  
   @IsDateString()
   @IsNotEmpty()
   StartTime:Date
